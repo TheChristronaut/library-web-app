@@ -1,4 +1,7 @@
+const library = document.querySelector("#library");
+
 const myLibrary = [];
+myLibrary.sort();
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -16,3 +19,10 @@ function addBookToLibrary() {
 addBookToLibrary();
 
 console.log(myLibrary);
+
+for (const book of myLibrary) {
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("book");
+    bookCard.textContent = book;
+    library.appendChild(bookCard);
+}

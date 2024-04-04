@@ -2,7 +2,22 @@ body {
     margin: 0;
 }
 
+#page-content {
+    display: flex;
+    min-height: 100vh;
+    max-height: fit-content;
+    border: solid red;
+}
+
+#side-bar {
+    flex: 1;
+    position: sticky;
+    background-color: black;
+    color: white;
+}
+
 #library {
+    flex: 3;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 33vh;
@@ -16,4 +31,5 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 30px;
 }
