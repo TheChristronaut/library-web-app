@@ -9,19 +9,46 @@
 <body>
     <div id="page-content">
         <div id="side-bar">
+            <dialog id="new-book-dialogue">
+                <form action="test" method="post">
+                    <ul>
+                        <li>
+                            <label for="title">Book Title:</label>
+                            <input type="text" id="title" minlength="1">
+                        </li>
+                        <li>
+                            <label for="author">Author:</label>
+                            <input type="text" id="Author" minlength="1">
+                        </li>
+                        <li>
+                            <label for="page-location">Page You Are On:</label>
+                            <input type="number" id="page-location" min="1">
+                        </li>
+                        <li>
+                            <label for="page-number">Total Number of Pages:</label>
+                            <input type="number" id="page-number" min="1">
+                        </li>
+                        <li>
+                            <h3>Have you finished this book?</h3>
+                                <div>
+                                    <label for="yes-button">Yes</label>
+                                    <input type="radio" id="yes-button" name="book-status" value="yes">
+                                </div>
+                                <div>
+                                    <label for="no-button">No</label>
+                                    <input type="radio" id="no-button" name="book-status" value="no" checked>
+                                </div>
+                        </li>
+                    </ul>
+                    <button type="submit" class="form-btn">Add Book</button>
+                    <button type="reset" class="form-btn">Reset</button>
+                    <button type="button" id="close-form-btn" class="form-btn">Close</button>
+                </form>
+            </dialog>
+            <button id="new-book-btn">New Book</button>
             I am the side bar
         </div>
         <div id="library">
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
-            <div class="book"></div>
         </div>
     </div>
     <script src="index.js"></script>
