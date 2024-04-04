@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+#library {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 33vh;
+    padding: 10vh 10vw 10vh 10vw;
+    gap: 5vh;
+}
+
+.book {
+    border: solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
