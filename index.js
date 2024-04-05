@@ -3,6 +3,9 @@ const newBookBtn = document.querySelector("#new-book-btn");
 const closeFormBtn = document.querySelector("#close-form-btn");
 const submitFormBtn = document.querySelector("#submit-form-btn");
 const newBookForm = document.querySelector("#new-book-dialogue");
+const pageUpdateForm = document.querySelector("#read-pages-update");
+const submitUpdateFormBtn = document.querySelector("#submit-pages-form-btn");
+const closeUpdateFormBtn = document.querySelector("#close--pages-form-btn");
 
 const myLibrary = [];
 myLibrary.sort();
@@ -25,6 +28,22 @@ function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
         bookCard.classList.add("book");
         bookCard.textContent = book;
         library.appendChild(bookCard);
+
+        const updateBtn = document.createElement("button");
+        updateBtn.textContent = "Update Pages Read";
+        updateBtn.classList.add("book-btn")
+        bookCard.appendChild(updateBtn);
+        updateBtn.addEventListener("click", () => {
+            pageUpdateForm.showModal();
+        })
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.classList.add("book-btn")
+        bookCard.appendChild(deleteBtn);
+        deleteBtn.addEventListener("click", () => {
+            
+        })
     }
 }
 
@@ -34,6 +53,10 @@ function getReadStatus(pagesReadInput, pagesInput) {
     } else {
         return("finished");
     }
+}
+
+function updatePagesRead(title, author, newPagesRead, pages, newReadStatus) {
+    addBookToLibrary (title, author, newPagesRead, pages, newReadStatus);
 }
 
 newBookBtn.addEventListener("click", () => {
@@ -51,7 +74,6 @@ submitFormBtn.addEventListener("click", (event) => {
     const authorInput = document.querySelector("#author").value;
     const pagesReadInput = document.querySelector("#page-location").value;
     const pagesInput = document.querySelector("#page-number").value;
-
     const inputReadStatus = getReadStatus(pagesReadInput, pagesInput);
 
     addBookToLibrary(titleInput, authorInput, pagesReadInput, pagesInput, inputReadStatus)
@@ -62,4 +84,16 @@ submitFormBtn.addEventListener("click", (event) => {
     document.querySelector("#page-number").value = "";
 
     newBookForm.close();
+});
+
+submitUpdateFormBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const newPagesRead = document.querySelector("#new-page-location").value;
+    const newReadStatus = getReadStatus(newPagesRead, pages);
+    updatePagesRead(title, author, newPagesRead, pages, newReadStatus);
+    pageUpdateForm.close();
+})
+
+closeUpdateFormBtn.addEventListener("click", () => {
+    pageUpdateForm.close();
 });

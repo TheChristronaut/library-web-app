@@ -9,7 +9,7 @@
 <body>
     <div id="page-content">
         <div id="side-bar">
-            <dialog id="new-book-dialogue">
+            <dialog id="new-book-dialogue" class="form-dialogue">
                 <form action="test" method="post">
                     <ul>
                         <li>
@@ -32,6 +32,18 @@
                     <button type="submit" id="submit-form-btn" class="form-btn">Add Book</button>
                     <button type="reset" class="form-btn">Reset</button>
                     <button type="button" id="close-form-btn" class="form-btn">Close</button>
+                </form>
+            </dialog>
+            <dialog id="read-pages-update" class="form-dialogue">
+                <form action="test" method="post">
+                    <ul>
+                        <li>
+                            <label for="new-page-location">Pages You've Read:</label>
+                            <input type="number" id="new-page-location" min="1">
+                        </li>
+                    </ul>
+                    <button type="submit" id="submit-pages-form-btn" class="form-btn">Update</button>
+                    <button type="button" id="close--pages-form-btn" class="form-btn">Close</button>
                 </form>
             </dialog>
             <button id="new-book-btn">New Book</button>
