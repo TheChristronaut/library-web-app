@@ -30,13 +30,11 @@ function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
 
 function getReadStatus(pagesReadInput, pagesInput) {
     if (pagesReadInput < pagesInput) {
-        return ("not finsished yet")
+        return ("not finished yet")
     } else {
-        return("finsihed");
+        return("finished");
     }
 }
-
-addBookToLibrary("A Crown of Ivy and Glass", "Claire LeGrand", "554", "554", "finished.");
 
 newBookBtn.addEventListener("click", () => {
     newBookForm.showModal();
