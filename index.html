@@ -7,47 +7,50 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="header">
+        <img src="images/the-christronaut-title.png" alt="The Cosmic Christronaut" id="logo" height="100%">
+    </div>
     <div id="page-content">
         <div id="side-bar">
             <dialog id="new-book-dialogue" class="form-dialogue">
-                <form action="test" method="post">
-                    <ul>
+                <form action="test" method="post" id="add-book-form">
+                    <ul id="form-dialogue-ul">
                         <li>
-                            <label for="title">Book Title:</label>
-                            <input type="text" id="title" minlength="1">
+                            <label for="book-title">Book Title:</label>
+                            <input type="text" id="book-title" minlength="1" class="form-input">
                         </li>
                         <li>
                             <label for="author">Author:</label>
-                            <input type="text" id="author" minlength="1">
+                            <input type="text" id="author" minlength="1" class="form-input">
                         </li>
                         <li>
                             <label for="page-location">Pages You've Read:</label>
-                            <input type="number" id="page-location" min="1">
+                            <input type="number" id="page-location" min="1" class="form-input">
                         </li>
                         <li>
                             <label for="page-number">Total Number of Pages:</label>
-                            <input type="number" id="page-number" min="1">
+                            <input type="number" id="page-number" min="1" class="form-input">
                         </li>
                     </ul>
-                    <button type="submit" id="submit-form-btn" class="form-btn">Add Book</button>
-                    <button type="reset" class="form-btn">Reset</button>
-                    <button type="button" id="close-form-btn" class="form-btn">Close</button>
+                    <button type="submit" id="submit-form-btn" class="form-btn"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 -960 960 960" width="1.5em"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg><br>Add Book</button>
+                    <button type="reset" class="form-btn"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 -960 960 960" width="1.5em"><path d="M440-122q-121-15-200.5-105.5T160-440q0-66 26-126.5T260-672l57 57q-38 34-57.5 79T240-440q0 88 56 155.5T440-202v80Zm80 0v-80q87-16 143.5-83T720-440q0-100-70-170t-170-70h-3l44 44-56 56-140-140 140-140 56 56-44 44h3q134 0 227 93t93 227q0 121-79.5 211.5T520-122Z"/></svg><br>Reset</button>
+                    <button type="button" id="close-form-btn" class="form-btn"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 -960 960 960" width="1.5em"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg><br>Close</button>
                 </form>
             </dialog>
             <dialog id="read-pages-update" class="form-dialogue">
-                <form action="test" method="post">
-                    <ul>
+                <form action="test" method="post" id="new-book-form">
+                    <ul id="update-form-ul">
                         <li>
                             <label for="new-page-location">Pages You've Read:</label>
-                            <input type="number" id="new-page-location" min="1">
+                            <input type="number" id="new-page-location" min="1" class="form-input">
                         </li>
                     </ul>
-                    <button type="submit" id="submit-pages-form-btn" class="form-btn">Update</button>
-                    <button type="button" id="close--pages-form-btn" class="form-btn">Close</button>
+                    <button type="submit" id="submit-pages-form-btn" class="update-form-btn"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 -960 960 960" width="1.5em"><path d="M480-120q-75 0-140.5-28.5t-114-77q-48.5-48.5-77-114T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q82 0 155.5 35T760-706v-94h80v240H600v-80h110q-41-56-101-88t-129-32q-117 0-198.5 81.5T200-480q0 117 81.5 198.5T480-200q105 0 183.5-68T756-440h82q-15 137-117.5 228.5T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg><br>Update</button>
+                    <button type="button" id="close-pages-form-btn" class="update-form-btn"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 -960 960 960" width="1.5em"><path d="m336-280 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg><br>Close</button>
                 </form>
             </dialog>
-            <button id="new-book-btn">New Book</button>
-            I am the side bar
+            <div id="title"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 -960 960 960" width="1em" class="icon"><path d="M480-60q-72-68-165-104t-195-36v-440q101 0 194 36.5T480-498q73-69 166-105.5T840-640v440q-103 0-195.5 36T480-60Zm0-104q63-47 134-75t146-37v-276q-73 13-143.5 52.5T480-394q-66-66-136.5-105.5T200-552v276q75 9 146 37t134 75Zm0-436q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-760q0-33-23.5-56.5T480-840q-33 0-56.5 23.5T400-760q0 33 23.5 56.5T480-680Zm0-80Zm0 366Z"/></svg>Library</div>
+            <button id="new-book-btn"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 -960 960 960" width="1em"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>Add New Book</button>
         </div>
         <div id="library">
         </div>

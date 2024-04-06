@@ -5,7 +5,7 @@ const submitFormBtn = document.querySelector("#submit-form-btn");
 const newBookForm = document.querySelector("#new-book-dialogue");
 const pageUpdateForm = document.querySelector("#read-pages-update");
 const submitUpdateFormBtn = document.querySelector("#submit-pages-form-btn");
-const closeUpdateFormBtn = document.querySelector("#close--pages-form-btn");
+const closeUpdateFormBtn = document.querySelector("#close-pages-form-btn");
 
 const myLibrary = [];
 
@@ -15,7 +15,6 @@ function Book(title, author, pagesRead, pages, readStatus) {
     this.pagesRead = pagesRead;
     this.pages = pages;
     this.readStatus = readStatus;
-    return(this.title + " by " + author + ", " + pagesRead + " of " + pages + " pages read, " + readStatus + ".");
 }
 
 function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
@@ -25,7 +24,10 @@ function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
     const bookCard = document.createElement("div");
     bookCard.classList.add("book");
     const bookInfo = `${newBook.title} by ${newBook.author}, ${newBook.pagesRead} of ${newBook.pages} pages read, ${newBook.readStatus}.`;
-    bookCard.textContent = bookInfo;
+    const bookInfoBlock  = document.createElement("div");
+    bookInfoBlock.classList.add("book-info");
+    bookInfoBlock.textContent = bookInfo;
+    bookCard.appendChild(bookInfoBlock);
     bookCard.dataset.bookIndex = myLibrary.length - 1;
     library.appendChild(bookCard);
 
@@ -118,11 +120,26 @@ function updatePagesRead(bookIndex, newPagesRead) {
     
     const bookCard = library.querySelector(`.book[data-book-index="${bookIndex}"]`);
     if (bookCard) {
-        const bookInfo = `${book.title} by ${book.author}, ${book.pagesRead} of ${book.pages} pages read, ${book.readStatus}.`;
-        bookCard.textContent = bookInfo;
+        const bookInfoElement = bookCard.querySelector('.book-info');
+        if (bookInfoElement) {
+            bookInfoElement.textContent = `${book.title} by ${book.author}, ${book.pagesRead} of ${book.pages} pages read, ${book.readStatus}.`;
+        }
     }
 
+    const progressBar = bookCard.querySelector('.progress-bar');
+    if (progressBar) {
+        progressBar.remove();
+    }
     createProgressBar(bookCard, book.pagesRead, book.pages);
+
+    const updateBtn = bookCard.querySelector('.update-book-btn');
+    const deleteBtn = bookCard.querySelector('.delete-book-btn');
+    if (updateBtn) {
+        updateBtn.remove();
+    }
+    if (deleteBtn) {
+        deleteBtn.remove();
+    }
     createUpdateBtn(bookCard);
     createDeleteBtn(bookCard);
 }
@@ -148,7 +165,7 @@ closeFormBtn.addEventListener("click", () => {
 submitFormBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const titleInput = document.querySelector("#title").value;
+    const titleInput = document.querySelector("#book-title").value;
     const authorInput = document.querySelector("#author").value;
     const pagesReadInput = document.querySelector("#page-location").value;
     const pagesInput = document.querySelector("#page-number").value;
