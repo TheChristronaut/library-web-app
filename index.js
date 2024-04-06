@@ -35,8 +35,21 @@ function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
 
 function createUpdateBtn(bookCard) {
     const updateBtn = document.createElement("button");
-    updateBtn.textContent = "Update Pages Read";
-    updateBtn.classList.add("book-btn")
+    updateBtn.classList.add("book-btn");
+    updateBtn.setAttribute("id", "update-book-btn")
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg.setAttribute("height", "24");
+    svg.setAttribute("viewBox", "0 -960 960 960");
+    svg.setAttribute("width", "24");
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path")
+    path.setAttribute("d", "M200-200v-560 560Zm80-400h400v-80H280v80Zm0 160h190q20-24 43.5-44.5T565-520H280v80Zm0 160h122q2-21 7.5-41t13.5-39H280v80Zm-80 160q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v223q-19-8-39-13.5t-41-7.5v-202H200v560h202q2 21 7.5 41t13.5 39H200Zm520 80q-73 0-127.5-45.5T524-200h62q13 44 49.5 72t84.5 28q58 0 99-41t41-99q0-58-41-99t-99-41q-29 0-54 10.5T622-340h58v60H520v-160h60v57q27-26 63-41.5t77-15.5q83 0 141.5 58.5T920-240q0 83-58.5 141.5T720-40Z");
+
+    svg.appendChild(path);
+    updateBtn.appendChild(svg);
+
     bookCard.appendChild(updateBtn);
     updateBtn.addEventListener("click", () => {
         const bookIndex = parseInt(bookCard.dataset.bookIndex);
@@ -48,9 +61,22 @@ function createUpdateBtn(bookCard) {
 
 function createDeleteBtn(bookCard) {
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.classList.add("book-btn")
-    bookCard.appendChild(deleteBtn);
+    deleteBtn.classList.add("book-btn");
+    deleteBtn.setAttribute("id", "delete-book-btn")
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svg.setAttribute("height", "24");
+    svg.setAttribute("viewBox", "0 -960 960 960");
+    svg.setAttribute("width", "24");
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z");
+
+    svg.appendChild(path);
+    deleteBtn.appendChild(svg);
+    
+    bookCard.appendChild(deleteBtn); 
     deleteBtn.addEventListener("click", () => {
         deleteBook(bookCard);
     });
