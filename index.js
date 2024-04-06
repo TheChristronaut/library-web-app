@@ -194,3 +194,8 @@ submitUpdateFormBtn.addEventListener("click", (event) => {
 closeUpdateFormBtn.addEventListener("click", () => {
     pageUpdateForm.close();
 });
+
+addBookToLibrary("The Silmarillion", "J.R.R. Tolkien", "304", "304", "finished");
+addBookToLibrary("The Last Wish", "Andrzej Sapkowski", "320", "320", "finished");
+addBookToLibrary("Sword of Destiny", "Andrzej Sapkowski", "290", "374", "finished");
+addBookToLibrary("The Unseen Realm", "Michael Heisser", "15", "383", "finished");
