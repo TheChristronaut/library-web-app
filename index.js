@@ -8,7 +8,6 @@ const submitUpdateFormBtn = document.querySelector("#submit-pages-form-btn");
 const closeUpdateFormBtn = document.querySelector("#close--pages-form-btn");
 
 const myLibrary = [];
-myLibrary.sort();
 
 function Book(title, author, pagesRead, pages, readStatus) {
     this.title = title;
@@ -20,31 +19,41 @@ function Book(title, author, pagesRead, pages, readStatus) {
 }
 
 function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
-    let newBook = Book(title, author, pagesRead, pages, readStatus)
-    myLibrary.length = 0;
+    let newBook = new Book(title, author, pagesRead, pages, readStatus)
     myLibrary.push(newBook);
-    for (const book of myLibrary) {
-        const bookCard = document.createElement("div");
-        bookCard.classList.add("book");
-        bookCard.textContent = book;
-        library.appendChild(bookCard);
 
-        const updateBtn = document.createElement("button");
-        updateBtn.textContent = "Update Pages Read";
-        updateBtn.classList.add("book-btn")
-        bookCard.appendChild(updateBtn);
-        updateBtn.addEventListener("click", () => {
-            pageUpdateForm.showModal();
-        })
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("book");
+    const bookInfo = `${newBook.title} by ${newBook.author}, ${newBook.pagesRead} of ${newBook.pages} pages read, ${newBook.readStatus}.`;
+    bookCard.textContent = bookInfo;
+    bookCard.dataset.bookIndex = myLibrary.length - 1;
+    library.appendChild(bookCard);
 
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete";
-        deleteBtn.classList.add("book-btn")
-        bookCard.appendChild(deleteBtn);
-        deleteBtn.addEventListener("click", () => {
-            
-        })
-    }
+    createUpdateBtn(bookCard);
+    createDeleteBtn(bookCard);
+}
+
+function createUpdateBtn(bookCard) {
+    const updateBtn = document.createElement("button");
+    updateBtn.textContent = "Update Pages Read";
+    updateBtn.classList.add("book-btn")
+    bookCard.appendChild(updateBtn);
+    updateBtn.addEventListener("click", () => {
+        const bookIndex = parseInt(bookCard.dataset.bookIndex);
+        const book = myLibrary[bookIndex];
+        pageUpdateForm.dataset.bookIndex = bookIndex
+        pageUpdateForm.showModal();
+    });   
+}
+
+function createDeleteBtn(bookCard) {
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.classList.add("book-btn")
+    bookCard.appendChild(deleteBtn);
+    deleteBtn.addEventListener("click", () => {
+        deleteBook(bookCard);
+    });
 }
 
 function getReadStatus(pagesReadInput, pagesInput) {
@@ -55,8 +64,29 @@ function getReadStatus(pagesReadInput, pagesInput) {
     }
 }
 
-function updatePagesRead(title, author, newPagesRead, pages, newReadStatus) {
-    addBookToLibrary (title, author, newPagesRead, pages, newReadStatus);
+function updatePagesRead(bookIndex, newPagesRead) {
+    const book = myLibrary[bookIndex];
+    book.pagesRead = newPagesRead;
+    book.readStatus = getReadStatus(newPagesRead, book.pages);
+    
+    const bookCard = library.querySelector(`.book[data-book-index="${bookIndex}"]`);
+    if (bookCard) {
+        const bookInfo = `${book.title} by ${book.author}, ${book.pagesRead} of ${book.pages} pages read, ${book.readStatus}.`;
+        bookCard.textContent = bookInfo;
+    }
+
+    createUpdateBtn(bookCard);
+    createDeleteBtn(bookCard);
+}
+
+function deleteBook(bookCard) {
+    bookCard.remove();
+    
+    const index = Array.from(library.children).indexOf(bookCard);
+    
+    if (index !== -1) {
+        myLibrary.splice(index, 1);
+    }
 }
 
 newBookBtn.addEventListener("click", () => {
@@ -88,9 +118,11 @@ submitFormBtn.addEventListener("click", (event) => {
 
 submitUpdateFormBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    const newPagesRead = document.querySelector("#new-page-location").value;
-    const newReadStatus = getReadStatus(newPagesRead, pages);
-    updatePagesRead(title, author, newPagesRead, pages, newReadStatus);
+    const newPagesRead = parseInt(document.querySelector("#new-page-location").value);
+    const bookIndex = parseInt(pageUpdateForm.dataset.bookIndex);
+    const book = myLibrary[bookIndex];
+    const newReadStatus = getReadStatus(newPagesRead, book.pages);
+    updatePagesRead(bookIndex, newPagesRead);
     pageUpdateForm.close();
 })
 
