@@ -29,6 +29,7 @@ function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
     bookCard.dataset.bookIndex = myLibrary.length - 1;
     library.appendChild(bookCard);
 
+    createProgressBar(bookCard, newBook.pagesRead, newBook.pages);
     createUpdateBtn(bookCard);
     createDeleteBtn(bookCard);
 }
@@ -36,7 +37,7 @@ function addBookToLibrary(title, author, pagesRead, pages, readStatus) {
 function createUpdateBtn(bookCard) {
     const updateBtn = document.createElement("button");
     updateBtn.classList.add("book-btn");
-    updateBtn.setAttribute("id", "update-book-btn")
+    updateBtn.classList.add("update-book-btn");
 
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -62,7 +63,7 @@ function createUpdateBtn(bookCard) {
 function createDeleteBtn(bookCard) {
     const deleteBtn = document.createElement("button");
     deleteBtn.classList.add("book-btn");
-    deleteBtn.setAttribute("id", "delete-book-btn")
+    deleteBtn.classList.add("delete-book-btn");
 
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -80,6 +81,26 @@ function createDeleteBtn(bookCard) {
     deleteBtn.addEventListener("click", () => {
         deleteBook(bookCard);
     });
+}
+
+function createProgressBar(bookCard, progressPagesRead, progressPages) {
+    const progressBar = document.createElement('div');
+    progressBar.classList.add("progress-bar");
+    const progressBarTotal = document.createElement('div');
+    progressBarTotal.classList.add("progress-total");
+    progressBarTotal.style.height = "100%";
+    let totalProgressPercent = percentage(progressPagesRead, progressPages) + "%";
+    progressBarTotal.style.width = totalProgressPercent;
+    
+    function percentage(progressPagesRead, progressPages) {
+        let num1 = parseInt(progressPagesRead);
+        let num2 = parseInt(progressPages);
+        let totalProgress = parseInt((num1 * 100) / num2);
+        return(totalProgress);
+    }
+
+    progressBar.appendChild(progressBarTotal);
+    bookCard.appendChild(progressBar);
 }
 
 function getReadStatus(pagesReadInput, pagesInput) {
@@ -101,6 +122,7 @@ function updatePagesRead(bookIndex, newPagesRead) {
         bookCard.textContent = bookInfo;
     }
 
+    createProgressBar(bookCard, book.pagesRead, book.pages);
     createUpdateBtn(bookCard);
     createDeleteBtn(bookCard);
 }
