@@ -1,0 +1,1 @@
+This project is a Library app. It allows you to add books you've read, how many total pages the book has and then how many pages you've read of the book. It then will update the status if the book has been finished or not yet finished.
